@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090611">
+  <title>A Birthday Surprise for Nadj</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="stars" id="stars" aria-hidden="true"></div>
+  <main class="wrap">
+    <section class="card hero" id="welcome">
+      <div class="kicker">a little surprise made for you</div>
+      <h1>For Nadj</h1>
+      <p>I made something small for your special day. Take a moment, get comfortable, and enjoy.</p>
+      <button class="btn" id="startBtn">Start the surprise</button>
+      <p class="tiny">with care, just for you</p>
+    </section>
+
+    <section class="card hidden" id="countdown">
+      <div class="kicker">before your little surprise</div>
+      <h2>Ready, Nadj?</h2>
+      <div class="count-number" id="countNumber">10</div>
+      <div class="count-label">counting down to your day</div>
+    </section>
+
+    <section class="card hidden" id="gallery">
+      <div class="kicker">little moments, lovely you</div>
+      <h2>A few things I wanted to say</h2>
+      <p>Eight pictures, and a few thoughts I've been wanting to share.</p>
+
+      <div class="music-wrap">
+        <span class="music-label">A LITTLE BIRTHDAY SOUNDTRACK</span>
+        <button class="btn btn-small" id="musicBtn" type="button">Play music</button>
+      </div>
+
+      <div class="slide-area">
+        <button class="arrow" id="prev" aria-label="Previous picture" type="button">‹</button>
+        <div class="slide-content">
+          <div class="photo-card" id="photoCard">
+            <img id="photo" src="images/nadj-01.jpg" alt="Photo of Nadj">
+          </div>
+          <div class="photo-label" id="photoLabel">a little memory · 01</div>
+          <h3 class="caption-title" id="captionTitle"></h3>
+          <p class="caption-text" id="captionText"></p>
+          <div class="dots" id="dots"></div>
+          <div class="counter" id="counter">01 / 08</div>
+        </div>
+        <button class="arrow" id="next" aria-label="Next picture" type="button">›</button>
+      </div>
+
+      <p class="tiny">Use the arrows or dots to move through the pictures.</p>
+      <button class="btn" id="letterBtn" type="button">A little birthday note</button>
+    </section>
+
+    <section class="card hidden" id="letter">
+      <div class="kicker">from someone who thinks you're special</div>
+      <h2>Happy Birthday, Nadj</h2>
+      <div class="letter">I hope your day is filled with happiness, laughter, and all the little things that make you smile.
+
+I'm really glad I got to know you. You might not notice it, but your smile, your personality, and the little things you do have a way of making an ordinary day feel a little brighter.
+
+I hope you always see the good in yourself, even on days when things feel difficult. Keep being you, because there's something genuinely lovely about the person you are.
+
+I hope this year brings you new memories, good surprises, and more reasons to laugh. You deserve to feel appreciated, today and every day.
+
+Happy birthday once again. I hope this little surprise made you smile.</div>
+      <div class="signature">— someone quietly cheering for you</div>
+      <button class="btn letter-back" id="againBtn" type="button">See the pictures again</button>
+    </section>
+  </main>
+
+  <!-- Add your own permitted audio file at audio/birthday-sex.mp3 -->
+  <audio id="birthdayAudio" src="audio/birthday-sex.mp3" preload="auto" loop></audio>
+
+  <script>
+    const slides = [
+      {file:"nadj-01.jpg",title:"Cute mo dito, babyyy.",text:"Wag kang mabadtrip ah. Gusto lang kitang ipaalala sa childhood pic mo. Ang cute mo na pala talaga kahit noon pa."},
+      {file:"nadj-02.jpg",title:"Dito rin, baby.",text:"Parang ang bait-bait mo pa dito, babyy. Nakakatuwang makita yung younger version mo. Sana alam mong ang precious mo."},
+      {file:"nadj-03.jpg",title:"Naalala ko itong moment na ito.",text:"Ito yung in-update mo ako, pauwi ka pa niyan. Simple lang yung update mo, pero nakakatuwa kasi naisip mong sabihin sa akin."},
+      {file:"nadj-04.jpg",title:"Ang cute mo habang nagbabasa.",text:"Ito yung nag-tambay kayo. Ang cute mo dito habang nagbabasa. Gusto ko yung ganitong moments mo, yung natural ka lang at sarili mo."},
+      {file:"nadj-05.jpg",title:"Happy birthday, mahal.",text:"Akit na akit mo ako dito, mahal. Hindi ko alam kung napapansin mo, pero may mga picture ka talagang napapangiti ako. Sana masaya ka palagi."},
+      {file:"nadj-06.jpg",title:"One of the first pictures.",text:"Isa ito sa first pics na sinend mo kaya sinama ko. Ang simple lang, pero special sa akin kasi isa ito sa mga unang little things na shinare mo."},
+      {file:"nadj-07.jpg",title:"Yey, ang cute mo, mahal.",text:"Ang cute mo talaga dito. Sana makita mo rin kung gaano ka ka-lovely sa paningin ng ibang tao, lalo na sa akin."},
+      {file:"nadj-08.jpg",title:"My best picture of you.",text:"Best pic for me. I love you. Gusto ko lang malaman mo na hindi lang itsura mo yung gusto ko, pati yung little things na bumubuo sa'yo."}
+    ];
+
+    let current = 0;
+    let musicStarted = false;
+    const $ = id => document.getElementById(id);
+    const audio = $("birthdayAudio");
+
+    function render() {
+      const slide = slides[current];
+      const card = $("photoCard");
+      card.classList.add("changing");
+      setTimeout(() => {
+        $("photo").src = "images/" + slide.file;
+        $("photo").alt = "Photo " + (current + 1) + " of Nadj";
+        $("captionTitle").textContent = slide.title;
+        $("captionText").textContent = slide.text;
+        $("photoLabel").textContent = "a little memory · " + String(current + 1).padStart(2, "0");
+        $("counter").textContent = String(current + 1).padStart(2, "0") + " / 08";
+        [...$("dots").children].forEach((dot, i) => dot.classList.toggle("active", i === current));
+        card.classList.remove("changing");
+      }, 160);
+    }
+
+    slides.forEach((slide, i) => {
+      const dot = document.createElement("button");
+      dot.className = "dot";
+      dot.type = "button";
+      dot.setAttribute("aria-label", "Show picture " + (i + 1));
+      dot.addEventListener("click", () => { current = i; render(); });
+      $("dots").appendChild(dot);
+    });
+
+    $("prev").addEventListener("click", () => { current = (current + 7) % 8; render(); });
+    $("next").addEventListener("click", () => { current = (current + 1) % 8; render(); });
+    render();
+
+    function show(id) {
+      $(id).classList.remove("hidden");
+      $(id).scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    function updateMusicButton() {
+      $("musicBtn").textContent = audio.paused ? "Play music" : "Pause music";
+    }
+
+    async function playMusic() {
+      try {
+        await audio.play();
+        musicStarted = true;
+      } catch (error) {
+        musicStarted = false;
+        alert("Hindi pa ma-play ang audio. Siguraduhing na-upload ang audio/birthday-sex.mp3, tapos pindutin ulit ang Play music.");
+      }
+      updateMusicButton();
+    }
+
+    $("startBtn").addEventListener("click", () => {
+      // Playback is attempted directly from this tap because browsers restrict autoplay.
+      playMusic();
+      $("welcome").classList.add("hidden");
+      show("countdown");
+      let n = 10;
+      $("countNumber").textContent = n;
+      const timer = setInterval(() => {
+        n--;
+        if (n > 0) {
+          $("countNumber").textContent = n;
+        } else {
+          clearInterval(timer);
+          $("countdown").classList.add("hidden");
+          show("gallery");
+        }
+      }, 1000);
+    });
+
+    $("musicBtn").addEventListener("click", () => {
+      if (audio.paused) playMusic();
+      else { audio.pause(); musicStarted = false; updateMusicButton(); }
+    });
+
+    $("letterBtn").addEventListener("click", () => {
+      $("gallery").classList.add("hidden");
+      show("letter");
+    });
+    $("againBtn").addEventListener("click", () => {
+      $("letter").classList.add("hidden");
+      show("gallery");
+    });
+
+    audio.addEventListener("play", updateMusicButton);
+    audio.addEventListener("pause", updateMusicButton);
+
+    for (let i = 0; i < 35; i++) {
+      const star = document.createElement("span");
+      star.className = "star";
+      star.textContent = "✦";
+      star.style.left = Math.random() * 100 + "%";
+      star.style.top = Math.random() * 100 + "%";
+      star.style.fontSize = (7 + Math.random() * 11) + "px";
+      star.style.animationDelay = (-Math.random() * 8) + "s";
+      $("stars").appendChild(star);
+    }
+  </script>
+</body>
+</html>
