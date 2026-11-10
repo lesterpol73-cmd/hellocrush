@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff0f5">
+  <title>A Little Birthday Surprise for Nadj 💗</title>
+  <style>
+    :root{--pink:#e98bab;--deep:#bd527c;--ink:#6e4657;--paper:#fffafd;--soft:#fff0f5}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);font-family:Georgia,"Times New Roman",serif;background:radial-gradient(circle at 10% 10%,#ffe0eb 0,transparent 30%),radial-gradient(circle at 90% 30%,#fce5f0 0,transparent 28%),linear-gradient(145deg,#fffafd,#fff0f5);min-height:100vh;overflow-x:hidden}
+    button{font:inherit}
+    .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+    .heart{position:absolute;bottom:-40px;color:#ed9bb8;opacity:.55;animation:floatUp linear infinite}
+    @keyframes floatUp{to{transform:translateY(-115vh) rotate(25deg);opacity:0}}
+    .wrap{position:relative;z-index:1;width:min(920px,92%);margin:auto;padding:28px 0 60px}
+    .hero,.panel{background:#ffffffc9;border:1px solid #f7d5e2;border-radius:28px;box-shadow:0 18px 55px #bd527c16;backdrop-filter:blur(8px)}
+    .hero{text-align:center;padding:clamp(35px,8vw,75px) 22px;margin:5vh 0 28px}
+    .eyebrow{letter-spacing:3px;text-transform:uppercase;color:#c77b99;font:12px Arial,sans-serif}
+    h1{font-size:clamp(38px,8vw,68px);font-weight:normal;line-height:1.05;margin:16px 0;color:#b9517a}
+    .hero p{font:16px/1.8 Arial,sans-serif;max-width:520px;margin:0 auto 25px;color:#866171}
+    .btn{border:0;border-radius:999px;padding:13px 23px;background:linear-gradient(135deg,#ed9fba,#d86f98);color:white;box-shadow:0 8px 20px #d86f9840;cursor:pointer;transition:.2s}
+    .btn:hover{transform:translateY(-2px);filter:saturate(1.1)}
+    .tiny{font-size:13px;color:#b27a91;margin-top:18px}
+    .panel{padding:clamp(20px,5vw,38px);margin:24px 0;text-align:center}
+    .section-title{font-size:clamp(27px,5vw,38px);font-weight:normal;color:#b9517a;margin:0 0 10px}
+    .sub{font:14px/1.7 Arial,sans-serif;color:#9a7182;margin:0 auto 22px}
+    .slide-area{display:grid;grid-template-columns:42px minmax(0,1fr) 42px;gap:12px;align-items:center}
+    .arrow{width:42px;height:42px;border:1px solid #f1c4d5;background:#fff5f9;color:#bd6486;border-radius:50%;font-size:22px;cursor:pointer}
+    .photo-card{margin:auto;width:min(100%,520px);padding:13px 13px 20px;background:white;border-radius:10px;box-shadow:0 12px 35px #8e53631e;transform:rotate(-1deg);transition:opacity .25s,transform .25s}
+    .photo-card.changing{opacity:0;transform:translateY(12px) rotate(1deg)}
+    .photo-card img{display:block;width:100%;height:min(58vh,520px);object-fit:contain;background:#fff7fa;border-radius:5px}
+    .photo-label{font:12px Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#c17b96;margin:17px 0 7px}
+    .caption-title{font-size:25px;font-weight:normal;color:#b9517a;margin:0 0 10px}
+    .caption-text{font:15px/1.8 Arial,sans-serif;color:#806171;margin:0 auto;max-width:560px}
+    .dots{display:flex;justify-content:center;gap:8px;margin:20px 0 0}
+    .dot{width:8px;height:8px;border:0;border-radius:50%;background:#f0c4d4;padding:0;cursor:pointer}
+    .dot.active{background:#c85f88;transform:scale(1.35)}
+    .counter{font:12px Arial,sans-serif;color:#b27a91;margin-top:12px}
+    .letter{max-width:650px;margin:auto;text-align:left;font:16px/2 Arial,sans-serif;color:#795a69;white-space:pre-line}
+    .signature{text-align:right;color:#bd6486;font:italic 20px Georgia,serif;margin-top:20px}
+    .footer{text-align:center;font:12px Arial,sans-serif;color:#b27a91;padding:18px}
+    .hidden{display:none!important}
+    .reveal{animation:rise .8s both}
+    @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:560px){.slide-area{grid-template-columns:34px minmax(0,1fr) 34px;gap:6px}.arrow{width:34px;height:34px}.photo-card{padding:9px 9px 16px}.photo-card img{height:48vh}.caption-text{font-size:14px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+  <main class="wrap">
+    <section class="hero" id="welcome">
+      <div class="eyebrow">a little something made for you</div>
+      <h1>Happy Birthday,<br>Nadj! <span aria-hidden="true">💗</span></h1>
+      <p>I made a small corner of the internet just for your special day. I hope it makes you smile.</p>
+      <button class="btn" id="openBtn">Open your surprise ✨</button>
+      <div class="tiny">made with a little extra care ♡</div>
+    </section>
+
+    <section class="panel hidden" id="gallery">
+      <div class="eyebrow">little moments, lovely you</div>
+      <h2 class="section-title">A few things I wanted to say</h2>
+      <p class="sub">Take your time. There's a little message with every photo. ♡</p>
+      <div class="slide-area">
+        <button class="arrow" id="prev" aria-label="Previous photo">‹</button>
+        <div>
+          <div class="photo-card" id="photoCard">
+            <img id="photo" src="images/nadj-01.jpg" alt="A favorite photo of Nadj">
+          </div>
+          <div class="photo-label" id="photoLabel">a little heart for someone special</div>
+          <h3 class="caption-title" id="captionTitle"></h3>
+          <p class="caption-text" id="captionText"></p>
+          <div class="dots" id="dots" aria-label="Choose a photo"></div>
+          <div class="counter" id="counter">01 / 08</div>
+        </div>
+        <button class="arrow" id="next" aria-label="Next photo">›</button>
+      </div>
+      <p class="sub" style="margin-top:24px">You can use the arrows or dots to look through the pictures.</p>
+      <button class="btn" id="letterBtn">One last little note 💌</button>
+    </section>
+
+    <section class="panel hidden" id="letter">
+      <div class="eyebrow">from someone wishing you well</div>
+      <h2 class="section-title">A little birthday letter</h2>
+      <div class="letter">Happy Birthday, Nadj! 💗
+
+I hope your special day is filled with happiness, laughter, and all the things that make you smile.
+
+I just want you to know that I'm genuinely happy to have met someone like you. I may not always say it, but I admire you more than you probably realize.
+
+There's something about you that I can't really explain. Maybe it's your smile, your personality, the little things you do, or simply the way you make ordinary moments feel a little more special.
+
+I hope life gives you countless reasons to be happy. Keep being the person you are, because you are already wonderful in your own way.
+
+You deserve all the good things this world has to offer.
+
+Enjoy your day, Nadj. You deserve it. 🌷</div>
+      <div class="signature">— From someone who's quietly happy to have you in his life.</div>
+      <div style="text-align:center;margin-top:30px"><button class="btn" id="againBtn">See the photos again ♡</button></div>
+    </section>
+    <div class="footer">made with care, just for Nadj · happy birthday ♡</div>
+  </main>
+  <script>
+    const slides = [
+      {file:"nadj-01.jpg", title:"A little heart for someone special.", text:"Maybe you don't realize it, but there's something about you that makes my day a little better. Even a simple picture of you can make me smile."},
+      {file:"nadj-02.jpg", title:"A little throwback", text:"Look at this little version of you. I wonder how someone could grow up to become this lovely. Some things really do get more beautiful with time."},
+      {file:"nadj-03.jpg", title:"The little things", text:"I don't know how you do it, but even in the simplest moments, you still manage to catch my attention."},
+      {file:"nadj-04.jpg", title:"In your own little world", text:"One thing I find beautiful about you is how you have your own little world. There's something special about seeing you just being yourself."},
+      {file:"nadj-05.jpg", title:"That smile", text:"Your smile, your little expressions, and even the smallest things you do... I guess those are some of the reasons why I started liking you."},
+      {file:"nadj-06.jpg", title:"Keep laughing", text:"If there's one thing I wish for you, it's to always have a reason to smile and laugh like this. You deserve all the happiness in the world."},
+      {file:"nadj-07.jpg", title:"Look how far you've come", text:"From this little girl to the person you are today, I hope you never forget how special and precious you are."},
+      {file:"nadj-08.jpg", title:"A little more than admiration", text:"And if you ever wonder why I admire you, it's not just because of how pretty you are. It's the little things that make you who you are. And somehow, those little things made me fall for you."}
+    ];
+    let current = 0;
+    const $ = id => document.getElementById(id);
+    function render(){
+      const s=slides[current], card=$("photoCard");
+      card.classList.add("changing");
+      setTimeout(()=>{
+        $("photo").src="images/"+s.file;
+        $("photo").alt="Photo "+(current+1)+" of Nadj";
+        $("captionTitle").textContent=s.title;
+        $("captionText").textContent=s.text;
+        $("photoLabel").textContent="a little memory · "+String(current+1).padStart(2,"0");
+        $("counter").textContent=String(current+1).padStart(2,"0")+" / "+String(slides.length).padStart(2,"0");
+        [...$("dots").children].forEach((d,i)=>d.classList.toggle("active",i===current));
+        card.classList.remove("changing");
+      },180);
+    }
+    slides.forEach((s,i)=>{
+      const d=document.createElement("button");
+      d.className="dot";d.setAttribute("aria-label","Show photo "+(i+1));
+      d.addEventListener("click",()=>{current=i;render()});
+      $("dots").appendChild(d);
+    });
+    $("captionTitle").textContent=slides[0].title;
+    $("captionText").textContent=slides[0].text;
+    render();
+    $("prev").onclick=()=>{current=(current-1+slides.length)%slides.length;render()};
+    $("next").onclick=()=>{current=(current+1)%slides.length;render()};
+    $("openBtn").onclick=()=>{$("gallery").classList.remove("hidden");$("gallery").classList.add("reveal");$("welcome").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth"})};
+    $("letterBtn").onclick=()=>{$("letter").classList.remove("hidden");$("letter").classList.add("reveal");$("gallery").classList.add("hidden");window.scrollTo({top:0,behavior:"smooth"})};
+    $("againBtn").onclick=()=>{$("letter").classList.add("hidden");$("gallery").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})};
+    for(let i=0;i<18;i++){const h=document.createElement("span");h.className="heart";h.textContent=["♡","♥","✿"][i%3];h.style.left=Math.random()*100+"%";h.style.fontSize=(14+Math.random()*18)+"px";h.style.animationDuration=(9+Math.random()*12)+"s";h.style.animationDelay=(-Math.random()*18)+"s";$("hearts").appendChild(h)}
+  </script>
+</body>
+</html>
